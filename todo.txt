@@ -1,1 +1,1 @@
-support for both circular and elliptical orbits
+Add support for both circular and elliptical orbits
