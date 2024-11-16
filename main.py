@@ -43,11 +43,10 @@ def escape_velocity(altitude_km, planet):
     v_escape = np.sqrt(2 * gravity * mass / R)
     return v_escape
 
-ascii_banner = pyfiglet.figlet_format("Orbital Calculator")
-print(Fore.CYAN + ascii_banner + Style.RESET_ALL)
-
 def main():
     clearConsole()
+    ascii_banner = pyfiglet.figlet_format("Orbital Calculator")
+    print(Fore.CYAN + ascii_banner + Style.RESET_ALL)
     planet = input(Fore.YELLOW + "Enter the planet name: " + Style.RESET_ALL).capitalize()
     if planet not in planets:
         print(Fore.RED + "Invalid planet name" + Style.RESET_ALL)
