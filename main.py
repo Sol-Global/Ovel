@@ -14,6 +14,7 @@ def clearConsole():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def restart_program():
+    input(Fore.YELLOW + "Press Enter to start over..." + Style.RESET_ALL)
     global warning_newline_printed
     warning_newline_printed = False
     main()
@@ -50,11 +51,25 @@ def main():
     planet = input(Fore.YELLOW + "Enter the planet name: " + Style.RESET_ALL).capitalize()
     if planet not in planets:
         print(Fore.RED + "Invalid planet name" + Style.RESET_ALL)
-        sys.exit(1)
-    apoapsis_input = input(Fore.YELLOW + "Enter the apoapsis in kilometers: " + Style.RESET_ALL)
-    periapsis_input = input(Fore.YELLOW + "Enter the periapsis in kilometers: " + Style.RESET_ALL)
-    apoapsis_km = float(apoapsis_input.replace("km", "").replace(" ", ""))
-    periapsis_km = float(periapsis_input.replace("km", "").replace(" ", ""))
+        restart_program()
+        
+    while True:
+        try:
+            apoapsis_input = input(Fore.YELLOW + "Enter the apoapsis in kilometers: " + Style.RESET_ALL)
+            apoapsis_km = float(apoapsis_input.replace("km", "").replace(" ", ""))
+            break
+        except ValueError:
+            print(Fore.RED + "Invalid input. Please enter a valid number." + Style.RESET_ALL)
+            restart_program()
+
+    while True:
+        try:
+            periapsis_input = input(Fore.YELLOW + "Enter the periapsis in kilometers: " + Style.RESET_ALL)
+            periapsis_km = float(periapsis_input.replace("km", "").replace(" ", ""))
+            break
+        except ValueError:
+            print(Fore.RED + "Invalid input. Please enter a valid number." + Style.RESET_ALL)
+            restart_program()
 
     # swap if periapsis is greater than apoapsis
     if periapsis_km > apoapsis_km:
@@ -88,7 +103,6 @@ def main():
         print(Fore.MAGENTA + f"\033[1mEscape velocity\033[0m at periapsis ({periapsis_km} km) on {planet} is {max_velocity_periapsis:.6f} m/s" + Style.RESET_ALL)
 
     print("")
-    input(Fore.YELLOW + "Press Enter to start over..." + Style.RESET_ALL)
     restart_program()
 
 if __name__ == "__main__":
