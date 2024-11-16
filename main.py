@@ -33,7 +33,8 @@ planet = input(Fore.YELLOW + "Enter the planet name: " + Style.RESET_ALL).capita
 if planet not in planets:
     print(Fore.RED + "Invalid planet name" + Style.RESET_ALL)
     sys.exit(1)
-altitude_km = float(input(Fore.YELLOW + "Enter the orbital altitude in kilometers: " + Style.RESET_ALL))
+altitude_input = input(Fore.YELLOW + "Enter the orbital altitude in kilometers: " + Style.RESET_ALL)
+altitude_km = float(altitude_input.replace("km", "").replace(" ", ""))
 
 # check for unrealistic altitude
 min_altitude = altitude_limits[planet]['min_altitude']
