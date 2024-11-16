@@ -11,6 +11,15 @@ subprocess.run("cls", shell=True) if os.name=="nt" else subprocess.run("clear", 
 
 coloramaInit()
 
+warning_newline_printed = False
+
+def display_warning(message):
+    global warning_newline_printed
+    if not warning_newline_printed:
+        print("")
+        warning_newline_printed = True
+    print(Fore.WHITE + Back.YELLOW + Style.BRIGHT + "Warning: " + message + Style.RESET_ALL)
+
 def orbital_velocity(altitude_km, planet):
     gravity = 6.67430e-11  # gravitational constant
     mass = planets[planet]['mass']
@@ -42,13 +51,20 @@ periapsis_input = input(Fore.YELLOW + "Enter the periapsis in kilometers: " + St
 apoapsis_km = float(apoapsis_input.replace("km", "").replace(" ", ""))
 periapsis_km = float(periapsis_input.replace("km", "").replace(" ", ""))
 
+# swap if periapsis is greater than apoapsis
+if periapsis_km > apoapsis_km:
+    apoapsis_km, periapsis_km = periapsis_km, apoapsis_km
+    display_warning("Periapsis was greater than apoapsis. Values have been swapped.")
+
 # check for unrealistic altitude
 min_altitude = altitude_limits[planet]['min_altitude']
 max_altitude = altitude_limits[planet]['max_altitude']
 if apoapsis_km < min_altitude or apoapsis_km > max_altitude or periapsis_km < min_altitude or periapsis_km > max_altitude:
-    print(Fore.WHITE + Back.YELLOW + Style.BRIGHT + f"Warning: The entered altitudes may be unrealistic for {planet}. They should be between {min_altitude} km and {max_altitude} km." + Style.RESET_ALL)
+    display_warning(f"The entered altitudes may be unrealistic for {planet}. They should be between {min_altitude} km and {max_altitude} km.")
 
-print(Fore.GREEN + f"Calculating for planet: {planet}" + Style.RESET_ALL)
+print("")
+print(Fore.GREEN + f"Calculating for {planet}..." + Style.RESET_ALL)
+print("")
 
 # call calculation functions
 velocity_apoapsis = orbital_velocity(apoapsis_km, planet)
@@ -65,3 +81,6 @@ else:
     print(Fore.BLUE + f"\033[1mMinimum\033[0m orbital velocity at periapsis ({periapsis_km} km) on {planet} is {velocity_periapsis:.6f} m/s" + Style.RESET_ALL)
     print(Fore.MAGENTA + f"\033[1mEscape velocity\033[0m at apoapsis ({apoapsis_km} km) on {planet} is {max_velocity_apoapsis:.6f} m/s" + Style.RESET_ALL)
     print(Fore.MAGENTA + f"\033[1mEscape velocity\033[0m at periapsis ({periapsis_km} km) on {planet} is {max_velocity_periapsis:.6f} m/s" + Style.RESET_ALL)
+
+print("")
+input(Fore.YELLOW + "Press Enter to exit..." + Style.RESET_ALL)
