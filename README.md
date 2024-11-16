@@ -1,29 +1,31 @@
 # Ovel
 
-Ovel is a Python CLI app that lets you calculate the minimum and maximum orbital velocity around a planet, using the given orbital altitude (in kilometers).
+Ovel is a Python CLI app that calculates the minimum and maximum orbital velocity around a planet based on the given orbital altitude (in kilometers).
 
-## Run the Application
+## Run the Application Directly
 
 ### Linux
 ```sh
-pip install -r requirements.txt && python3 main.py
+python3 -m venv venv
+venv/bin/pip install -r requirements.txt
+venv/bin/python main.py
 ```
 
 ### Windows
 ```sh
-pip install -r requirements.txt && python main.py
+python3 -m venv venv
+.venv\Scripts\pip.exe install -r requirements.txt
+.venv\Scripts\python.exe main.py
 ```
 
-## Building/Compiling the Application
+## Building the Application
 
 ### Windows
-To build the application to an executable, run:
+To build the application into an executable, run:
 ```sh
 ./build.ps1
 ```
-This uses PyInstaller to create an executable file that bundles the Python runtime and any dependencies.
-
-You can find the standalone executable in the `dist` folder.
+This uses PyInstaller to create a standalone executable, which can be found in the `dist` folder.
 
 ## Usage
 
