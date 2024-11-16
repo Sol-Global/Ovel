@@ -21,6 +21,8 @@ To build the application to an executable, run:
 ```sh
 ./build.ps1
 ```
+This uses PyInstaller to create an executable file that bundles the Python runtime and any dependencies.
+
 You can find the standalone executable in the `dist` folder.
 
 ## Usage
