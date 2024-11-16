@@ -6,14 +6,14 @@ import pyfiglet
 coloramaInit()
 
 altitude_limits = {
-    'Mercury': {'min_altitude': 0, 'max_altitude': 1000},
-    'Venus': {'min_altitude': 0, 'max_altitude': 250},
-    'Earth': {'min_altitude': 0, 'max_altitude': 1000},
-    'Mars': {'min_altitude': 0, 'max_altitude': 250},
-    'Jupiter': {'min_altitude': 0, 'max_altitude': 5000},
-    'Saturn': {'min_altitude': 0, 'max_altitude': 5000},
-    'Uranus': {'min_altitude': 0, 'max_altitude': 5000},
-    'Neptune': {'min_altitude': 0, 'max_altitude': 5000}
+    'Mercury': {'min_altitude': 200, 'max_altitude': 1500},  # avoids surface impacts and extreme temperatures
+    'Venus': {'min_altitude': 250, 'max_altitude': 2000},   # atmosphere ends around 250 km
+    'Earth': {'min_altitude': 160, 'max_altitude': 36_000}, # LEO to geostationary altitudes
+    'Mars': {'min_altitude': 250, 'max_altitude': 20_000},  # includes areostationary orbits
+    'Jupiter': {'min_altitude': 1_000, 'max_altitude': 200_000},  # avoids intense radiation belts
+    'Saturn': {'min_altitude': 3_000, 'max_altitude': 200_000},  # safe distance from rings and atmosphere
+    'Uranus': {'min_altitude': 5_000, 'max_altitude': 100_000},  # stability far from dense atmosphere
+    'Neptune': {'min_altitude': 5_000, 'max_altitude': 100_000}  # stability due to extreme winds
 }
 
 planets = {
@@ -59,7 +59,7 @@ altitude_km = float(input(Fore.YELLOW + "Enter the orbital altitude in kilometer
 min_altitude = altitude_limits[planet]['min_altitude']
 max_altitude = altitude_limits[planet]['max_altitude']
 if altitude_km < min_altitude or altitude_km > max_altitude:
-    print(Fore.WHITE + Back.YELLOW + Style.BRIGHT + f"Warning: The entered altitude is unrealistic for {planet}. It should be between {min_altitude} km and {max_altitude} km." + Style.RESET_ALL)
+    print(Fore.WHITE + Back.YELLOW + Style.BRIGHT + f"Warning: The entered altitude may be unrealistic for {planet}. It should be between {min_altitude} km and {max_altitude} km." + Style.RESET_ALL)
 
 print(Fore.GREEN + f"Calculating for planet: {planet}" + Style.RESET_ALL)
 
