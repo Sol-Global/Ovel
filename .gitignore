@@ -4,3 +4,4 @@ dist
 Ovel.spec
 .venv
 fontsPath.txt
+*.pyc

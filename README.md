@@ -1,6 +1,6 @@
 # Ovel
 
-Ovel is a Python CLI app that calculates the minimum and maximum orbital velocity around a planet based on the given orbital altitude (in kilometers).
+Ovel is a Python CLI app that calculates the orbital velocity around a planet based on the given orbital altitude (in kilometers).
 
 ## Run the Application Directly
 

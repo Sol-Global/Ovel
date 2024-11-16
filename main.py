@@ -1,9 +1,13 @@
 import numpy as np
 import sys
+import os
+import subprocess
 from colorama import Fore, Style, Back, init as coloramaInit
 import pyfiglet
 # local imports
 from planets import planets, altitude_limits
+
+subprocess.run("cls", shell=True) if os.name=="nt" else subprocess.run("clear", shell=True)
 
 coloramaInit()
 
@@ -33,21 +37,31 @@ planet = input(Fore.YELLOW + "Enter the planet name: " + Style.RESET_ALL).capita
 if planet not in planets:
     print(Fore.RED + "Invalid planet name" + Style.RESET_ALL)
     sys.exit(1)
-altitude_input = input(Fore.YELLOW + "Enter the orbital altitude in kilometers: " + Style.RESET_ALL)
-altitude_km = float(altitude_input.replace("km", "").replace(" ", ""))
+apoapsis_input = input(Fore.YELLOW + "Enter the apoapsis in kilometers: " + Style.RESET_ALL)
+periapsis_input = input(Fore.YELLOW + "Enter the periapsis in kilometers: " + Style.RESET_ALL)
+apoapsis_km = float(apoapsis_input.replace("km", "").replace(" ", ""))
+periapsis_km = float(periapsis_input.replace("km", "").replace(" ", ""))
 
 # check for unrealistic altitude
 min_altitude = altitude_limits[planet]['min_altitude']
 max_altitude = altitude_limits[planet]['max_altitude']
-if altitude_km < min_altitude or altitude_km > max_altitude:
-    print(Fore.WHITE + Back.YELLOW + Style.BRIGHT + f"Warning: The entered altitude may be unrealistic for {planet}. It should be between {min_altitude} km and {max_altitude} km." + Style.RESET_ALL)
+if apoapsis_km < min_altitude or apoapsis_km > max_altitude or periapsis_km < min_altitude or periapsis_km > max_altitude:
+    print(Fore.WHITE + Back.YELLOW + Style.BRIGHT + f"Warning: The entered altitudes may be unrealistic for {planet}. They should be between {min_altitude} km and {max_altitude} km." + Style.RESET_ALL)
 
 print(Fore.GREEN + f"Calculating for planet: {planet}" + Style.RESET_ALL)
 
 # call calculation functions
-velocity = orbital_velocity(altitude_km, planet)
-max_velocity = escape_velocity(altitude_km, planet)
+velocity_apoapsis = orbital_velocity(apoapsis_km, planet)
+velocity_periapsis = orbital_velocity(periapsis_km, planet)
+max_velocity_apoapsis = escape_velocity(apoapsis_km, planet)
+max_velocity_periapsis = escape_velocity(periapsis_km, planet)
 
 # results
-print(Fore.BLUE + f"\033[1mMinimum\033[0m orbital velocity at {altitude_km} km altitude on {planet} is {velocity:.2f} m/s" + Style.RESET_ALL)
-print(Fore.MAGENTA + f"\033[1mMaximum\033[0m orbital velocity at {altitude_km} km altitude on {planet} before reaching escape velocity is {max_velocity:.2f} m/s" + Style.RESET_ALL)
+if apoapsis_km == periapsis_km:
+    print(Fore.BLUE + f"\033[1mOrbital velocity\033[0m for circular orbit at {apoapsis_km} km on {planet} is {velocity_apoapsis:.6f} m/s" + Style.RESET_ALL)
+    print(Fore.MAGENTA + f"\033[1mEscape velocity\033[0m for circular orbit at {apoapsis_km} km on {planet} is {max_velocity_apoapsis:.6f} m/s" + Style.RESET_ALL)
+else:
+    print(Fore.BLUE + f"\033[1mMinimum\033[0m orbital velocity at apoapsis ({apoapsis_km} km) on {planet} is {velocity_apoapsis:.6f} m/s" + Style.RESET_ALL)
+    print(Fore.BLUE + f"\033[1mMinimum\033[0m orbital velocity at periapsis ({periapsis_km} km) on {planet} is {velocity_periapsis:.6f} m/s" + Style.RESET_ALL)
+    print(Fore.MAGENTA + f"\033[1mEscape velocity\033[0m at apoapsis ({apoapsis_km} km) on {planet} is {max_velocity_apoapsis:.6f} m/s" + Style.RESET_ALL)
+    print(Fore.MAGENTA + f"\033[1mEscape velocity\033[0m at periapsis ({periapsis_km} km) on {planet} is {max_velocity_periapsis:.6f} m/s" + Style.RESET_ALL)
