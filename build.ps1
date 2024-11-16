@@ -21,5 +21,13 @@ if (-Not (Test-Path -Path ".venv")) {
     . .\.venv\Scripts\Activate.ps1
 }
 
-$pyfigletFontsPath = ".venv/Lib/site-packages/pyfiglet/fonts"
+$fontPathFile = "fontPath.txt"
+if (Test-Path -Path $fontPathFile) {
+    $pyfigletFontsPath = Get-Content -Path $fontPathFile
+} else {
+    Write-Host "Please enter the path to pyfiglet fonts:"
+    $pyfigletFontsPath = Read-Host
+    Set-Content -Path $fontPathFile -Value $pyfigletFontsPath
+}
+
 pyinstaller --onefile --name Ovel --hidden-import=numpy --hidden-import=colorama --hidden-import=pyfiglet --hidden-import=pyfiglet.fonts --hidden-import=colorama.Fore --hidden-import=colorama.Back --hidden-import=colorama.Style --hidden-import=colorama.Init --add-data "$pyfigletFontsPath;pyfiglet/fonts" main.py
