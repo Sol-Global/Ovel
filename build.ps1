@@ -1,1 +1,1 @@
-pyinstaller --onefile main.py
+pyinstaller --onefile --name Ovel --hidden-import=numpy colorama pyfiglet --hidden-import=pyfiglet.fonts colorama.Fore colorama.Back colorama.Style colorama.Init main.py
