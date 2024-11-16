@@ -7,6 +7,8 @@ import pyfiglet
 # local imports
 from planets import planets, altitude_limits
 
+version = "v1.0"
+
 coloramaInit()
 warning_newline_printed = False
 
@@ -46,7 +48,7 @@ def escape_velocity(altitude_km, planet):
 
 def main():
     clearConsole()
-    ascii_banner = pyfiglet.figlet_format("Orbital Calculator")
+    ascii_banner = pyfiglet.figlet_format(f"Ovel {version}")
     print(Fore.CYAN + ascii_banner + Style.RESET_ALL)
     planet = input(Fore.YELLOW + "Enter the planet name: " + Style.RESET_ALL).capitalize()
     if planet not in planets:
