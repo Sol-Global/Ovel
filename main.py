@@ -7,7 +7,7 @@ import pyfiglet
 # local imports
 from planets import planets, altitude_limits
 
-version = "v1.1"
+version = "v1.2"
 
 coloramaInit()
 warning_newline_printed = False
