@@ -59,6 +59,9 @@ def main():
         try:
             apoapsis_input = input(Fore.YELLOW + "Enter the apoapsis in kilometers: " + Style.RESET_ALL)
             apoapsis_km = float(apoapsis_input.replace("km", "").replace(" ", ""))
+            if apoapsis_km < 0:
+                print(Fore.RED + "Invalid input. Please enter a positive number." + Style.RESET_ALL)
+                restart_program()
             break
         except ValueError:
             print(Fore.RED + "Invalid input. Please enter a valid number." + Style.RESET_ALL)
@@ -68,6 +71,9 @@ def main():
         try:
             periapsis_input = input(Fore.YELLOW + "Enter the periapsis in kilometers: " + Style.RESET_ALL)
             periapsis_km = float(periapsis_input.replace("km", "").replace(" ", ""))
+            if periapsis_km < 0:
+                print(Fore.RED + "Invalid input. Please enter a positive number." + Style.RESET_ALL)
+                restart_program()
             break
         except ValueError:
             print(Fore.RED + "Invalid input. Please enter a valid number." + Style.RESET_ALL)
