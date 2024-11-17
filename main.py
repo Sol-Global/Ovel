@@ -52,7 +52,7 @@ def main():
     print(Fore.CYAN + ascii_banner + Style.RESET_ALL)
     planet = input(Fore.YELLOW + "Enter the planet name: " + Style.RESET_ALL).capitalize()
     if planet not in planets:
-        print(Fore.RED + "Invalid planet name" + Style.RESET_ALL)
+        print(Fore.RED + "We don't yet support this planet! You can request it at https://github.com/Sol-Global/Ovel/issues" + Style.RESET_ALL)
         restart_program()
         
     while True:
