@@ -2,6 +2,8 @@
 
 Ovel is a Python CLI app that calculates the orbital velocity around a planet based on the given orbital altitude (in kilometers).
 
+![image](https://github.com/user-attachments/assets/b1ce35b3-d298-4aac-82ae-e4e00aa1e564)
+
 ## Run the Application Directly
 
 ### Linux
